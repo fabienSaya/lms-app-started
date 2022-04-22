@@ -24,7 +24,7 @@ export class ErrorsInterceptor implements HttpInterceptor {
               if (err instanceof HttpErrorResponse) {
                   console.log('error est interceptée', err.status);
                   switch (err.status) {
-                    case 401: //faudrait plutot alert en material mais là on a pas le tps
+                    case 401: //faudrait plutot alert en material ou une snackbar (cf le site material.angular.io) mais là on a pas le tps
                       alert("Vous n'etes pas connecté");
                       //on devrait router dans ce cas vers la page de login (ca utilise le fichier de routing)
                       //this.router.navigate(['login']);
