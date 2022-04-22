@@ -66,9 +66,20 @@ export class StudentAddFormComponent implements OnInit {
 
     if (this.studentForm.valid) {
       console.log('formulaire valide')
-      this.studentSvc.addStudentsFromApi(this.studentForm.value).subscribe(
-          response => console.log(response)
-          )
+      let newStudent=this.studentForm.value;
+      //nouvelle écriture du subscribe.
+      this.studentSvc.createNewStudentInApi(newStudent).subscribe(
+          {
+              next  : response => console.log(response),//si tout s'est bien passé
+              error : err => { //si on a une erreur sur l'appel
+                console.error(err);
+                if (err.status==404) {
+                  alert("La ressource n'existe pas");
+                }
+              }
+
+          }
+        )
       //console.log(response);
     } else {
       console.log('formulaire invalide')

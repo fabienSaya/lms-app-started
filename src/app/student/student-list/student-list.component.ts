@@ -19,7 +19,7 @@ export class StudentListComponent implements OnInit {
       data => {
         console.log(data)
         this.students = data
-  
+
       }
     )
   }

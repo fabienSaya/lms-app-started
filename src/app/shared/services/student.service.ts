@@ -24,8 +24,30 @@ export class StudentService {
     ))
   }
 
-  addStudentsFromApi(student:any):Observable<any> {
-    return this.http.post(environment.apiStudentUrl+'/customers',student);
+   /*
+    Poster un nouvel apprenant
+    method : POST
+    endpoint : '/customers'
+  */
+    createNewStudentInApi(newStudent:any):Observable<any> {
+      //return this.http.post(environment.apiStudentUrl+'/customers', newStudent);
+
+      //test où je génère une 404 volontairement en mettant mauvais endpoint. Normalement c'est customers
+      return this.http.post(environment.apiStudentUrl+'/cus', newStudent);
+    }
+
+
+  /*
+    Update un nouvel apprenant
+    method : PUT
+    endpoint : '/customers'
+  */
+  updateStudentInApi(student:StudentModel):Observable<any> {
+    return this.http.put(environment.apiStudentUrl+'/customers/'+student.id, student);
+  }
+
+  deleteStudentInApi(student:StudentModel):Observable<any> {
+    return this.http.delete(environment.apiStudentUrl+'/customers/'+student.id);
   }
 
 }
