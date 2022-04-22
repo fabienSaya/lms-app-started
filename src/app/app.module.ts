@@ -45,9 +45,6 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     /* import pour formulaire */
     ReactiveFormsModule,
 
-    MatSnackBarModule,
-    MatProgressBarModule,
-
     /* MATERIAL ANGULAR MODULES */
     MatToolbarModule,
     MatIconModule,
@@ -60,7 +57,9 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatMenuModule
+    MatMenuModule,
+    MatSnackBarModule,
+    MatProgressBarModule
   ],
   providers: [
     /*l'ordre des intercepteur est important. On mettrait dans l'ordre:
