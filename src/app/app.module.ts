@@ -19,10 +19,11 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatMenuModule} from '@angular/material/menu';
 
 import { CourseComponent } from './course/course.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { StudentListComponent } from './student/student-list/student-list.component';
 import { StudentAddFormComponent } from './student/student-add-form/student-add-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ErrorsInterceptor } from './shared/interceptors/errors.interceptor';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,18 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatSelectModule,
     MatMenuModule
   ],
-  providers: [],
+  providers: [
+    /*l'ordre des intercepteur est important. On mettrait dans l'ordre:
+      1er : LoaderInterceptor (le next envoie vers le second intercepteur) -> c'est ce qui sert a afficher les fenetre d'attente/pour patienter quand on envoie une requete à qqn
+      2eme: TokenInterceptor
+      3eme: ErrorsInterceptor (il gère les erreurs de réponse)
+      */
+    {
+      provide : HTTP_INTERCEPTORS,
+      useClass : ErrorsInterceptor,
+      multi:true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
