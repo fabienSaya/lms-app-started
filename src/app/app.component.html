@@ -1,4 +1,4 @@
-<header> 
+<header>
     <!-- NAVBAR -->
     <mat-toolbar color="primary">
       <mat-toolbar-row>
@@ -16,18 +16,21 @@
             <mat-icon>assignment</mat-icon>
             <span>Inscription</span>
           </button>
-          
+
         </mat-menu>
 
       </mat-toolbar-row>
       </mat-toolbar>
+
+      <!--loader -->
+      <mat-progress-bar *ngIf="loaderSvc.isLoading$ |async " mode="indeterminate"></mat-progress-bar>
 </header>
 
 <main>
   <div class="container-fluid">
-    
+
     <div class="row">
-      
+
       <!-- MENU -->
       <div class="col-md-3 col-lg-2 ps-0">
         <!-- <app-menu> -->
@@ -40,14 +43,14 @@
         </div>
 
       </div>
-  
+
       <!-- MAIN -->
       <div class="col-md-9 col-lg-10 p-3">
         <!-- <app-course></app-course> -->
         <!-- <app-student-list></app-student-list> -->
         <router-outlet></router-outlet>
       </div>
-  
+
     </div>
   </div>
 </main>

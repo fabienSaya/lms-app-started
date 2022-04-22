@@ -25,6 +25,9 @@ import { StudentAddFormComponent } from './student/student-add-form/student-add-
 import { ReactiveFormsModule } from '@angular/forms';
 import { ErrorsInterceptor } from './shared/interceptors/errors.interceptor';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { LoaderInterceptor } from './shared/interceptors/loader.interceptor';
+
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -43,6 +46,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     ReactiveFormsModule,
 
     MatSnackBarModule,
+    MatProgressBarModule,
 
     /* MATERIAL ANGULAR MODULES */
     MatToolbarModule,
@@ -64,11 +68,17 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
       2eme: TokenInterceptor
       3eme: ErrorsInterceptor (il gère les erreurs de réponse)
       */
-    {
-      provide : HTTP_INTERCEPTORS,
-      useClass : ErrorsInterceptor,
-      multi:true
-    }
+
+      {
+        provide : HTTP_INTERCEPTORS,
+        useClass : LoaderInterceptor,
+        multi:true
+      },
+      {
+        provide : HTTP_INTERCEPTORS,
+        useClass : ErrorsInterceptor,
+        multi:true
+      }
   ],
   bootstrap: [AppComponent]
 })
