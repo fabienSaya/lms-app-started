@@ -30,10 +30,10 @@ export class StudentService {
     endpoint : '/customers'
   */
     createNewStudentInApi(newStudent:any):Observable<any> {
-      //return this.http.post(environment.apiStudentUrl+'/customers', newStudent);
+      return this.http.post(environment.apiStudentUrl+'/customers', newStudent);
 
       //test où je génère une 404 volontairement en mettant mauvais endpoint. Normalement c'est customers
-      return this.http.post(environment.apiStudentUrl+'/cus', newStudent);
+//      return this.http.post(environment.apiStudentUrl+'/cus', newStudent);
     }
 
 

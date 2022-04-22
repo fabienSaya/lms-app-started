@@ -24,6 +24,7 @@ import { StudentListComponent } from './student/student-list/student-list.compon
 import { StudentAddFormComponent } from './student/student-add-form/student-add-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ErrorsInterceptor } from './shared/interceptors/errors.interceptor';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,8 @@ import { ErrorsInterceptor } from './shared/interceptors/errors.interceptor';
 
     /* import pour formulaire */
     ReactiveFormsModule,
+
+    MatSnackBarModule,
 
     /* MATERIAL ANGULAR MODULES */
     MatToolbarModule,

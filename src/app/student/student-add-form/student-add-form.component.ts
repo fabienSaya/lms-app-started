@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AlertService } from 'src/app/shared/services/alert.service';
 import { StudentService } from 'src/app/shared/services/student.service';
 
 @Component({
@@ -12,7 +14,11 @@ export class StudentAddFormComponent implements OnInit {
   studentForm:FormGroup;
 
 
-  constructor(private fb:FormBuilder, private studentSvc:StudentService) {
+  constructor(private fb:FormBuilder,
+    private studentSvc:StudentService,
+    private alerteSvc: AlertService,
+    private router: Router
+    ) {
     /*this.studentForm = new FormGroup({
       first: new FormControl('', [
         Validators.required,
@@ -70,12 +76,18 @@ export class StudentAddFormComponent implements OnInit {
       //nouvelle écriture du subscribe.
       this.studentSvc.createNewStudentInApi(newStudent).subscribe(
           {
-              next  : response => console.log(response),//si tout s'est bien passé
-              /*error : err => { //si on a une erreur sur l'appel
+              next  : response => {
+                        //console.log(response)//si tout s'est bien passé
+                        this.alerteSvc.showMessage('vous avez bien ajouté un nouvel apprenant','Fermer');
+                        this.router.navigate(['/students']);
+                      }
+              //si on a une erreur sur l'appel maintenant on passe par l'intercepteur donc ca sert à rien
+              /*,error : err => {
                 console.error(err);
                 if (err.status==404) {
                   alert("La ressource n'existe pas");
                 }
+
               }*/
 
           }
