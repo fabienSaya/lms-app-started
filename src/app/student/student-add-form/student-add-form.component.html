@@ -6,17 +6,19 @@
 </div>
 
 
-<form (click)="onSubmit($event)" [formGroup]="studentForm" class="card-form">
+<form (submit)="onSubmit($event)" [formGroup]="studentForm" class="card-form">
     <div>
         <mat-form-field appearance="outline">
             <mat-label>Prénom</mat-label>
             <input formControlName="first" matInput>
-            <mat-error></mat-error>
+            <mat-error *ngIf="studentForm.controls['first'].hasError('required')">ce champs est requis</mat-error>
+            <mat-error *ngIf="studentForm.controls['first'].hasError('minlength')">ce champs doit faire au moins 2 caractères</mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>Nom</mat-label>
             <input formControlName="last" matInput>
-            <mat-error></mat-error>
+            <mat-error *ngIf="studentForm.controls['last'].hasError('required')">ce champs est requis</mat-error>
+            <mat-error *ngIf="studentForm.controls['last'].hasError('minlength')">ce champs doit faire au moins 2 caractères</mat-error>
         </mat-form-field>
     </div>
 
@@ -24,7 +26,8 @@
         <mat-form-field appearance="outline">
             <mat-label>Email</mat-label>
             <input formControlName="email" matInput>
-            <mat-error></mat-error>
+            <mat-error *ngIf="studentForm.controls['email'].hasError('required')">ce champs est requis</mat-error>
+            <mat-error *ngIf="studentForm.controls['email'].hasError('email')">l'email n'est pas au bon format</mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>Ville</mat-label>
@@ -47,6 +50,7 @@
                 <mat-option value="2">Salarié</mat-option>
                 <mat-option value="3">Demandeur d'emploi</mat-option>
             </mat-select>
+            <mat-error *ngIf="studentForm.controls['situation'].hasError('required')">ce champs est requis</mat-error>
         </mat-form-field>
     </div>
 
@@ -55,7 +59,7 @@
 </form>
 
 
-<pre>{{studentForm.value|json}} </pre>
+<!-- <pre>{{studentForm.value|json}} </pre>-->
 
 
 

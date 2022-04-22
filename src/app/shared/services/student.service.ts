@@ -24,6 +24,8 @@ export class StudentService {
     ))
   }
 
-
+  addStudentsFromApi(student:any):Observable<any> {
+    return this.http.post(environment.apiStudentUrl+'/customers',student);
+  }
 
 }

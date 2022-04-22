@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { StudentService } from 'src/app/shared/services/student.service';
 
 @Component({
   selector: 'app-student-add-form',
@@ -10,7 +11,8 @@ export class StudentAddFormComponent implements OnInit {
 
   studentForm:FormGroup;
 
-  constructor() {
+
+  constructor(private studentSvc:StudentService) {
     this.studentForm = new FormGroup({
       first: new FormControl('', [
         Validators.required,
@@ -33,14 +35,34 @@ export class StudentAddFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.studentForm.controls['first'].setValue('fabien');
+    this.studentForm.controls['last'].setValue('saya');
+    this.studentForm.controls['email'].setValue('fabien@hotmail.com');
+    this.studentForm.controls['city'].setValue('paris');
+    this.studentForm.controls['mobile'].setValue('06060606');
+    this.studentForm.controls['situation'].setValue('2');
   }
+
+
 
   onSubmit(event:Event) {
     //évite de recharger la parge au moment de la soumission
     //sinon, l'event normal de soumission est de faire l'action et recharger la page
     event.preventDefault();
 
-    console.log("submit");
+    console.log("onSubmit");
+    console.log(this.studentForm.value);
+//    console.log(this.studentForm);
+
+    if (this.studentForm.valid) {
+      console.log('formulaire valide')
+      this.studentSvc.addStudentsFromApi(this.studentForm.value).subscribe(
+          response => console.log(response)
+          )
+      //console.log(response);
+    } else {
+      console.log('formulaire invalide')
+    }
   }
 
 }
