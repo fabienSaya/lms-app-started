@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { StudentService } from 'src/app/shared/services/student.service';
 
 @Component({
@@ -12,8 +12,8 @@ export class StudentAddFormComponent implements OnInit {
   studentForm:FormGroup;
 
 
-  constructor(private studentSvc:StudentService) {
-    this.studentForm = new FormGroup({
+  constructor(private fb:FormBuilder, private studentSvc:StudentService) {
+    /*this.studentForm = new FormGroup({
       first: new FormControl('', [
         Validators.required,
         Validators.minLength(2)
@@ -32,6 +32,16 @@ export class StudentAddFormComponent implements OnInit {
       situation: new FormControl('',Validators.required)
 
       });
+      */
+      this.studentForm = this.fb.group({
+        first: ['', [Validators.required,Validators.minLength(2)]],
+        last: ['', [Validators.required,Validators.minLength(2)]],
+        email: ['', [Validators.required,Validators.email]],
+        city: [''],
+        mobile: [''],
+        situation: ['',Validators.required]
+      })
+
   }
 
   ngOnInit(): void {
